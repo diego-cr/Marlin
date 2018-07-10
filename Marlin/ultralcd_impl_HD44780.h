@@ -801,6 +801,25 @@ static void lcd_implementation_status_screen() {
         // When axis is homed but axis_known_position is false the axis letters are blinking 'X' <-> ' '.
         // When everything is ok you see a constant 'X'.
 
+       // LCD_ESTIMATED_TIME
+        #if ENABLED(LCD_ESTIMATED_TIME)
+        char ebuffer[10];
+        if ((card.isFileOpen()) && (((int)(card.percentDone()) >= 5))) {
+         duration_t lcdttotalnow = print_job_timer_lcd_estimated.duration();
+         duration_t lcdttotal = ((print_job_timer_lcd_estimated.duration()*100)/card.percentDone());
+         duration_t lcdtend = (((print_job_timer_lcd_estimated.duration()*100)/card.percentDone())-print_job_timer_lcd_estimated.duration());
+         lcd.print((char)LCD_CLOCK_CHAR);
+         lcdttotalnow.toDigital(ebuffer);
+         lcd_print(ebuffer);
+         lcd_print("  ");
+         lcdttotal.toDigital(ebuffer);
+         lcd_print(ebuffer);
+         lcd_print("  ");
+         lcdtend.toDigital(ebuffer);
+         lcd_print(ebuffer);
+         }
+        #else
+
         _draw_axis_label(X_AXIS, PSTR(MSG_X), blink);
         lcd.print(ftostr4sign(LOGICAL_X_POSITION(current_position[X_AXIS])));
 
@@ -809,10 +828,13 @@ static void lcd_implementation_status_screen() {
         _draw_axis_label(Y_AXIS, PSTR(MSG_Y), blink);
         lcd.print(ftostr4sign(LOGICAL_Y_POSITION(current_position[Y_AXIS])));
 
+        #endif // LCD_ESTIMATED_TIME
+
       #endif // HOTENDS > 1 || TEMP_SENSOR_BED != 0
 
     #endif // LCD_WIDTH >= 20
 
+    #if DISABLED(LCD_ESTIMATED_TIME)
     lcd.setCursor(LCD_WIDTH - 8, 1);
     _draw_axis_label(Z_AXIS, PSTR(MSG_Z), blink);
     lcd.print(ftostr52sp(FIXFLOAT(current_position[Z_AXIS])));
@@ -820,6 +842,7 @@ static void lcd_implementation_status_screen() {
     #if HAS_LEVELING
       lcd.write(planner.leveling_active || blink ? '_' : ' ');
     #endif
+    #endif // LCD_ESTIMATED_TIME
 
   #endif // LCD_HEIGHT > 2
 

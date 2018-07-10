@@ -595,6 +595,9 @@
    */
   //#define SD_REPRINT_LAST_SELECTED_FILE
 
+  // When using an LCD, uncomment the line below to display estimated total and remaining time, will appear for 5% printing or more
+  #define LCD_ESTIMATED_TIME
+
 #endif // SDSUPPORT
 
 /**

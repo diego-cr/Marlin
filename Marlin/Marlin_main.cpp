@@ -505,6 +505,11 @@ static millis_t stepper_inactive_time = (DEFAULT_STEPPER_DEACTIVE_TIME) * 1000UL
   Stopwatch print_job_timer = Stopwatch();
 #endif
 
+// LCD_ESTIMATED_TIME
+#if ENABLED(LCD_ESTIMATED_TIME)
+ Stopwatch print_job_timer_lcd_estimated = Stopwatch();
+#endif
+
 // Buzzer - I2C on the LCD or a BEEPER_PIN
 #if ENABLED(LCD_USE_I2C_BUZZER)
   #define BUZZ(d,f) lcd_buzz(d, f)
@@ -7546,7 +7551,12 @@ inline void gcode_M76() { print_job_timer.pause(); }
 /**
  * M77: Stop print timer
  */
-inline void gcode_M77() { print_job_timer.stop(); }
+inline void gcode_M77() {
+	print_job_timer.stop();
+        #if ENABLED(LCD_ESTIMATED_TIME)      
+         print_job_timer_lcd_estimated.stop();
+        #endif
+}
 
 #if ENABLED(PRINTCOUNTER)
   /**
@@ -7590,6 +7600,9 @@ inline void gcode_M104() {
        */
       if (parser.value_celsius() <= (EXTRUDE_MINTEMP) / 2) {
         print_job_timer.stop();
+	#if ENABLED(LCD_ESTIMATED_TIME)      
+	 print_job_timer_lcd_estimated.stop();
+	#endif
         LCD_MESSAGEPGM(WELCOME_MSG);
       }
     #endif
@@ -7746,6 +7759,9 @@ inline void gcode_M109() {
        */
       if (parser.value_celsius() <= (EXTRUDE_MINTEMP) / 2) {
         print_job_timer.stop();
+	#if ENABLED(LCD_ESTIMATED_TIME)      
+	 print_job_timer_lcd_estimated.stop();
+	#endif
         LCD_MESSAGEPGM(WELCOME_MSG);
       }
       else
@@ -7776,6 +7792,11 @@ inline void gcode_M109() {
 
   #if DISABLED(BUSY_WHILE_HEATING)
     KEEPALIVE_STATE(NOT_BUSY);
+  #endif
+
+  // LCD_ESTIMATED_TIME  
+  #if ENABLED(LCD_ESTIMATED_TIME)
+   print_job_timer_lcd_estimated.start();
   #endif
 
   #if ENABLED(PRINTER_EVENT_LEDS)
