@@ -984,7 +984,7 @@
  * the hardware SPI interface on your board and define the required CS pins
  * in your `pins_MYBOARD.h` file. (e.g., RAMPS 1.4 uses AUX3 pins `X_CS_PIN 53`, `Y_CS_PIN 49`, etc.).
  */
-//#define HAVE_TMC2130
+#define HAVE_TMC2130
 
 /**
  * Enable this for SilentStepStick Trinamic TMC2208 UART-configurable stepper drivers.
@@ -1001,11 +1001,11 @@
 #if ENABLED(HAVE_TMC2130) || ENABLED(HAVE_TMC2208)
 
   // CHOOSE YOUR MOTORS HERE, THIS IS MANDATORY
-  //#define X_IS_TMC2130
+  #define X_IS_TMC2130
   //#define X2_IS_TMC2130
-  //#define Y_IS_TMC2130
+  #define Y_IS_TMC2130
   //#define Y2_IS_TMC2130
-  //#define Z_IS_TMC2130
+  #define Z_IS_TMC2130
   //#define Z2_IS_TMC2130
   //#define E0_IS_TMC2130
   //#define E1_IS_TMC2130
@@ -1042,29 +1042,29 @@
   #define Z_CURRENT          800
   #define Z_MICROSTEPS        16
 
-  #define X2_CURRENT         800
-  #define X2_MICROSTEPS       16
+  //#define X2_CURRENT         800
+  //#define X2_MICROSTEPS       16
 
-  #define Y2_CURRENT         800
-  #define Y2_MICROSTEPS       16
+  //#define Y2_CURRENT         800
+  //#define Y2_MICROSTEPS       16
 
-  #define Z2_CURRENT         800
-  #define Z2_MICROSTEPS       16
+  //#define Z2_CURRENT         800
+  //#define Z2_MICROSTEPS       16
 
-  #define E0_CURRENT         800
-  #define E0_MICROSTEPS       16
+  //#define E0_CURRENT         800
+  //#define E0_MICROSTEPS       16
 
-  #define E1_CURRENT         800
-  #define E1_MICROSTEPS       16
+  //#define E1_CURRENT         800
+  //#define E1_MICROSTEPS       16
 
-  #define E2_CURRENT         800
-  #define E2_MICROSTEPS       16
+  //#define E2_CURRENT         800
+  //#define E2_MICROSTEPS       16
 
-  #define E3_CURRENT         800
-  #define E3_MICROSTEPS       16
+  //#define E3_CURRENT         800
+  //#define E3_MICROSTEPS       16
 
-  #define E4_CURRENT         800
-  #define E4_MICROSTEPS       16
+  //#define E4_CURRENT         800
+  //#define E4_MICROSTEPS       16
 
   /**
    * Use Trinamic's ultra quiet stepping mode.
@@ -1083,7 +1083,7 @@
    * M912 - Clear stepper driver overtemperature pre-warn condition flag.
    * M122 S0/1 - Report driver parameters (Requires TMC_DEBUG)
    */
-  //#define MONITOR_DRIVER_STATUS
+  #define MONITOR_DRIVER_STATUS
 
   #if ENABLED(MONITOR_DRIVER_STATUS)
     #define CURRENT_STEP_DOWN     50  // [mA]
@@ -1097,19 +1097,19 @@
    * STEALTHCHOP needs to be enabled.
    * M913 X/Y/Z/E to live tune the setting
    */
-  //#define HYBRID_THRESHOLD
+  #define HYBRID_THRESHOLD
 
   #define X_HYBRID_THRESHOLD     100  // [mm/s]
-  #define X2_HYBRID_THRESHOLD    100
+  //#define X2_HYBRID_THRESHOLD    100
   #define Y_HYBRID_THRESHOLD     100
-  #define Y2_HYBRID_THRESHOLD    100
-  #define Z_HYBRID_THRESHOLD       3
-  #define Z2_HYBRID_THRESHOLD      3
-  #define E0_HYBRID_THRESHOLD     30
-  #define E1_HYBRID_THRESHOLD     30
-  #define E2_HYBRID_THRESHOLD     30
-  #define E3_HYBRID_THRESHOLD     30
-  #define E4_HYBRID_THRESHOLD     30
+  //#define Y2_HYBRID_THRESHOLD    100
+  #define Z_HYBRID_THRESHOLD       100
+  //#define Z2_HYBRID_THRESHOLD      3
+  //#define E0_HYBRID_THRESHOLD     30
+  //#define E1_HYBRID_THRESHOLD     30
+  //#define E2_HYBRID_THRESHOLD     30
+  //#define E3_HYBRID_THRESHOLD     30
+  //#define E4_HYBRID_THRESHOLD     30
 
   /**
    * Use stallGuard2 to sense an obstacle and trigger an endstop.
