@@ -360,9 +360,9 @@
   //#define  DEFAULT_Kd 114
   
   // kossel
-  #define  DEFAULT_Kp 14.55
-  #define  DEFAULT_Ki 0.97
-  #define  DEFAULT_Kd 54.52
+  #define  DEFAULT_Kp 15.45
+  #define  DEFAULT_Ki 1.03
+  #define  DEFAULT_Kd 57.90
 
   // MakerGear
   //#define  DEFAULT_Kp 7.0
@@ -409,9 +409,9 @@
   //#define  DEFAULT_bedKd 305.4
   
   // kossel
-  #define  DEFAULT_bedKp 314.04
-  #define  DEFAULT_bedKi 61.83
-  #define  DEFAULT_bedKd 398.80
+  #define  DEFAULT_bedKp 237.05
+  #define  DEFAULT_bedKi 46.67
+  #define  DEFAULT_bedKd 301.00
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from pidautotune
