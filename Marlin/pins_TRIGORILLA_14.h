@@ -33,4 +33,17 @@
 #define FAN2_PIN             44
 #define ORIG_E0_AUTO_FAN_PIN 44
 
+#if AXIS_DRIVER_TYPE(X, TMC2130) 
+   #define X_CS_PIN          4
+#endif
+   #if AXIS_DRIVER_TYPE(Y, TMC2130) 
+#define Y_CS_PIN	     5
+#endif
+#if AXIS_DRIVER_TYPE(Z, TMC2130) 
+   #define Z_CS_PIN          6
+#endif
+#if AXIS_DRIVER_TYPE(E0, TMC2130) 
+   #define E0_CS_PIN        11
+#endif
+
 #include "pins_RAMPS.h"
