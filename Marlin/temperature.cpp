@@ -1500,6 +1500,10 @@ void Temperature::disable_all_heaters() {
   // If all heaters go down then for sure our print job has stopped
   print_job_timer.stop();
 
+  #if ENABLED(LCD_ESTIMATED_TIME)      
+    print_job_timer_lcd_estimated.stop();
+  #endif
+
   #define DISABLE_HEATER(NR) { \
     setTargetHotend(0, NR); \
     soft_pwm_amount[NR] = 0; \

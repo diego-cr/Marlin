@@ -833,22 +833,45 @@ static void lcd_implementation_status_screen() {
 
       #else // HOTENDS <= 2 && (HOTENDS <= 1 || !HAS_HEATED_BED)
 
+       // LCD_ESTIMATED_TIME
+        #if ENABLED(LCD_ESTIMATED_TIME)
+        char ebuffer[10];
+        if ((card.isFileOpen()) && (((int)(card.percentDone()) >= 5))) {
+         duration_t lcdttotalnow = print_job_timer_lcd_estimated.duration();
+         duration_t lcdttotal = ((print_job_timer_lcd_estimated.duration()*100)/card.percentDone());
+         duration_t lcdtend = (((print_job_timer_lcd_estimated.duration()*100)/card.percentDone())-print_job_timer_lcd_estimated.duration());
+         lcd.print((char)LCD_CLOCK_CHAR);
+         lcdttotalnow.toDigital(ebuffer);
+         lcd_print(ebuffer);
+         lcd_print("  ");
+         lcdttotal.toDigital(ebuffer);
+         lcd_print(ebuffer);
+         lcd_print("  ");
+         lcdtend.toDigital(ebuffer);
+         lcd_print(ebuffer);
+         }
+        #else
+
         _draw_axis_value(X_AXIS, ftostr4sign(LOGICAL_X_POSITION(current_position[X_AXIS])), blink);
 
         lcd.write(' ');
 
         _draw_axis_value(Y_AXIS, ftostr4sign(LOGICAL_Y_POSITION(current_position[Y_AXIS])), blink);
 
+	#endif // LCD_ESTIMATED_TIME
+
       #endif // HOTENDS <= 2 && (HOTENDS <= 1 || !HAS_HEATED_BED)
 
     #endif // LCD_WIDTH >= 20
 
+    #if DISABLED(LCD_ESTIMATED_TIME)
     lcd.setCursor(LCD_WIDTH - 8, 1);
     _draw_axis_value(Z_AXIS, ftostr52sp(LOGICAL_Z_POSITION(current_position[Z_AXIS])), blink);
 
     #if HAS_LEVELING && !HAS_HEATED_BED
       lcd.write(planner.leveling_active || blink ? '_' : ' ');
     #endif
+    #endif // LCD_ESTIMATED_TIME
 
   #endif // LCD_HEIGHT > 2
 

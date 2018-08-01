@@ -27,6 +27,11 @@
 #include "stopwatch.h"
 Stopwatch print_job_timer;      // Global Print Job Timer instance
 
+// LCD_ESTIMATED_TIME
+#if ENABLED(LCD_ESTIMATED_TIME)
+  Stopwatch print_job_timer_lcd_estimated;
+#endif
+
 #else // PRINTCOUNTER
 
 #include "printcounter.h"

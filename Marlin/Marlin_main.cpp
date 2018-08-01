@@ -8452,6 +8452,9 @@ inline void gcode_M104() {
        */
       if (parser.value_celsius() <= (EXTRUDE_MINTEMP) / 2) {
         print_job_timer.stop();
+	#if ENABLED(LCD_ESTIMATED_TIME)      
+	  print_job_timer_lcd_estimated.stop();
+	#endif
         lcd_reset_status();
       }
     #endif
@@ -8606,6 +8609,9 @@ inline void gcode_M109() {
        */
       if (parser.value_celsius() <= (EXTRUDE_MINTEMP) / 2) {
         print_job_timer.stop();
+	#if ENABLED(LCD_ESTIMATED_TIME)      
+	  print_job_timer_lcd_estimated.stop();
+	#endif
         lcd_reset_status();
       }
       else
@@ -8646,6 +8652,11 @@ inline void gcode_M109() {
   #if DISABLED(BUSY_WHILE_HEATING)
     KEEPALIVE_STATE(NOT_BUSY);
   #endif
+
+   //LCD_ESTIMATED_TIME  
+   #if ENABLED(LCD_ESTIMATED_TIME)
+    print_job_timer_lcd_estimated.start();
+   #endif
 
   #if ENABLED(PRINTER_EVENT_LEDS)
     const float start_temp = thermalManager.degHotend(target_extruder);
@@ -15489,6 +15500,9 @@ void loop() {
       clear_command_queue();
       quickstop_stepper();
       print_job_timer.stop();
+      #if ENABLED(LCD_ESTIMATED_TIME)      
+        print_job_timer_lcd_estimated.stop();
+      #endif
       thermalManager.disable_all_heaters();
       #if FAN_COUNT > 0
         for (uint8_t i = 0; i < FAN_COUNT; i++) fanSpeeds[i] = 0;
