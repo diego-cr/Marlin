@@ -906,6 +906,9 @@ void CardReader::printingHasFinished() {
       planner.finish_and_disable();
     #endif
     print_job_timer.stop();
+    #if ENABLED(LCD_ESTIMATED_TIME)      
+      print_job_timer_lcd_estimated.stop();
+    #endif
     if (print_job_timer.duration() > 60)
       enqueue_and_echo_commands_P(PSTR("M31"));
     #if ENABLED(SDCARD_SORT_ALPHA)
