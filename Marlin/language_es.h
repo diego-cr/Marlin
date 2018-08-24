@@ -169,6 +169,8 @@
 #define MSG_NO_CARD                         _UxGT("No hay tarjeta SD")
 #define MSG_DWELL                           _UxGT("Reposo...")
 #define MSG_USERWAIT                        _UxGT("Esperando ordenes")
+#define MSG_USERWAIT_ZPROBE                 _UxGT("Instale el sensor Z")
+#define MSG_USERWAIT_ZPROBE_R               _UxGT("Retire el sensor Z")
 #define MSG_PRINT_ABORTED                   _UxGT("Impresion cancelada")
 #define MSG_NO_MOVE                         _UxGT("Sin movimiento")
 #define MSG_KILLED                          _UxGT("Parada de emergencia")
