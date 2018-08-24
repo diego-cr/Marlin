@@ -6199,6 +6199,29 @@ void home_all_axes() { gcode_G28(true); }
     return a_fac;
   }
 
+  // Alert if have removable z probe
+
+  #if ENABLED(REMOVABLE_MOUNTED_PROBE)
+
+  inline void gcode_ZPROBE_MSG(bool zprobemsg) {
+
+    if (zprobemsg == 1)
+       LCD_ALERTMESSAGEPGM(MSG_USERWAIT_ZPROBE);
+    else 
+       LCD_ALERTMESSAGEPGM(MSG_USERWAIT_ZPROBE_R);
+    #if ENABLED(LCD_PROGRESS_BAR) && PROGRESS_MSG_EXPIRE > 0
+       dontExpireStatus();
+    #endif
+
+    KEEPALIVE_STATE(PAUSED_FOR_USER);
+    wait_for_user = true;
+    while (wait_for_user) idle();
+    lcd_reset_status();
+    wait_for_user = false;
+    KEEPALIVE_STATE(IN_HANDLER);
+  }
+  #endif
+
   /**
    * G33 - Delta '1-4-7-point' Auto-Calibration
    *       Calibrate height, z_offset, endstops, delta radius, and tower angles.
@@ -6227,6 +6250,11 @@ void home_all_axes() { gcode_G28(true); }
    *   E   Engage the probe for each point
    */
   inline void gcode_G33() {
+
+    // Show alert if have removable z probe
+    #if ENABLED(REMOVABLE_MOUNTED_PROBE)
+      gcode_ZPROBE_MSG(1);
+    #endif
 
     const int8_t probe_points = parser.intval('P', DELTA_CALIBRATION_DEFAULT_POINTS);
     if (!WITHIN(probe_points, 0, 10)) {
@@ -6445,6 +6473,10 @@ void home_all_axes() { gcode_G28(true); }
         if ((zero_std_dev >= test_precision && iterations > force_iterations) || zero_std_dev <= calibration_precision) { // end iterations
           SERIAL_PROTOCOLPGM("Calibration OK");
           SERIAL_PROTOCOL_SP(32);
+	  // Show alert if have removable z probe
+	  #if ENABLED(REMOVABLE_MOUNTED_PROBE)
+	    gcode_ZPROBE_MSG(0);
+	  #endif
           #if HAS_BED_PROBE
             if (zero_std_dev >= test_precision && !_1p_calibration && !_0p_calibration)
               SERIAL_PROTOCOLPGM("rolling back.");
