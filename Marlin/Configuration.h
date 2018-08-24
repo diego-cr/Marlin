@@ -793,7 +793,16 @@
  * A Fix-Mounted Probe either doesn't deploy or needs manual deployment.
  *   (e.g., an inductive probe or a nozzle-based probe-switch.)
  */
-#define FIX_MOUNTED_PROBE
+//#define FIX_MOUNTED_PROBE
+
+/**
+ * A Removalbe Probe, needs manual mount.
+ */
+
+#define REMOVABLE_MOUNTED_PROBE
+  #if ENABLED(REMOVABLE_MOUNTED_PROBE)
+        #define FIX_MOUNTED_PROBE
+  #endif
 
 /**
  * Z Servo Probe, such as an endstop switch on a rotating arm.

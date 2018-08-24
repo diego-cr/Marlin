@@ -684,6 +684,12 @@
 #ifndef MSG_USERWAIT
   #define MSG_USERWAIT                        _UxGT("Click to resume...")
 #endif
+#ifndef MSG_USERWAIT_ZPROBE
+  #define MSG_USERWAIT_ZPROBE                 _UxGT("Install Z Probe")
+#endif
+#ifndef MSG_USERWAIT_ZPROBE_R
+  #define MSG_USERWAIT_ZPROBE_R               _UxGT("Remove Z Probe")
+#endif
 #ifndef MSG_PRINT_PAUSED
   #define MSG_PRINT_PAUSED                    _UxGT("Print paused")
 #endif
