@@ -105,6 +105,7 @@
 #define MSG_SELECT                          _UxGT("Seleccionar")
 #define MSG_ACC                             _UxGT("Aceleracion")
 #define MSG_JERK                            _UxGT("Jerk")
+#define MSG_VELOCITY                        _UxGT("Velocidad")
 #if IS_SCARA
   #define MSG_VA_JERK                       _UxGT("Va-jerk")
   #define MSG_VB_JERK                       _UxGT("Vb-jerk")
@@ -156,6 +157,7 @@
 #define MSG_STORE_EEPROM                    _UxGT("Guardar memoria")
 #define MSG_LOAD_EEPROM                     _UxGT("Cargar memoria")
 #define MSG_RESTORE_FAILSAFE                _UxGT("Restaurar memoria")
+#define MSG_INIT_EEPROM                     _UxGT("Inicializar EEPROM")
 #define MSG_REFRESH                         _UxGT("Volver a cargar")
 #define MSG_WATCH                           _UxGT("Informacion")
 #define MSG_PREPARE                         _UxGT("Preparar")
@@ -214,6 +216,7 @@
 #define MSG_DELTA_CALIBRATE_CENTER          _UxGT("Calibrar Centro")
 #define MSG_DELTA_AUTO_CALIBRATE            _UxGT("Auto Calibracion")
 #define MSG_DELTA_HEIGHT_CALIBRATE          _UxGT("Est. Altura Delta")
+#define MSG_DELTA_Z_OFFSET_CALIBRATE        _UxGT("Offset sensor Z")
 #define MSG_INFO_MENU                       _UxGT("Inf. Impresora")
 #define MSG_INFO_PRINTER_MENU               _UxGT("Inf. Impresora")
 #define MSG_INFO_STATS_MENU                 _UxGT("Estadisticas Imp.")
