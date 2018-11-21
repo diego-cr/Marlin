@@ -997,7 +997,7 @@
 #elif ANYCUBIC_PROBE_VERSION == 1
   #define Z_PROBE_OFFSET_FROM_EXTRUDER -19.0  // Z offset: -below +above  [the nozzle]
 #elif ANYCUBIC_PROBE_VERSION == 3
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER -0.25  // Z offset: -below +above  [the nozzle]
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER -0.03  // Z offset: -below +above  [the nozzle]
 #else
   #define Z_PROBE_OFFSET_FROM_EXTRUDER   0    // Z offset: -below +above  [the nozzle]
 #endif
