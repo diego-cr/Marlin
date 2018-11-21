@@ -32,12 +32,16 @@
 #define DISPLAY_CHARSET_ISO10646_1
 #define CHARSIZE 2
 
-#define WELCOME_MSG                         MACHINE_NAME _UxGT(" lista.")
+#ifndef WELCOME_MSG
+ #define WELCOME_MSG                         MACHINE_NAME _UxGT(" lista.")
+#endif
 #define MSG_BACK                            _UxGT("Atrás")
 #define MSG_SD_INSERTED                     _UxGT("Tarjeta colocada")
 #define MSG_SD_REMOVED                      _UxGT("Tarjeta retirada")
 #define MSG_LCD_ENDSTOPS                    _UxGT("Endstops") // Max length 8 characters
 #define MSG_MAIN                            _UxGT("Menú principal")
+#define MSG_ADVANCED_SETTINGS               _UxGT("Configuracion avanzada")
+#define MSG_CONFIGURATION                   _UxGT("Configuracion")
 #define MSG_AUTOSTART                       _UxGT("Inicio automático")
 #define MSG_DISABLE_STEPPERS                _UxGT("Apagar motores")
 #define MSG_DEBUG_MENU                      _UxGT("Menú depurar")
@@ -134,6 +138,7 @@
 #define MSG_CONTRAST                        _UxGT("Contraste")
 #define MSG_STORE_EEPROM                    _UxGT("Guardar memoria")
 #define MSG_LOAD_EEPROM                     _UxGT("Cargar memoria")
+#define MSG_INIT_EEPROM                     _UxGT("Inicializar EEPROM")
 #define MSG_RESTORE_FAILSAFE                _UxGT("Restaurar memoria")
 #define MSG_REFRESH                         _UxGT("Volver a cargar")
 #define MSG_WATCH                           _UxGT("Información")
@@ -164,6 +169,8 @@
 #define MSG_ZPROBE_OUT                      _UxGT("Sonda Z fuera")
 #define MSG_BLTOUCH_SELFTEST                _UxGT("BLTouch Auto-Prueba")
 #define MSG_BLTOUCH_RESET                   _UxGT("Reiniciar BLTouch")
+#define MSG_MANUAL_DEPLOY                   _UxGT("Instale sensor Z")
+#define MSG_MANUAL_STOW                     _UxGT("Retire sensor Z")
 #define MSG_HOME                            _UxGT("Home")  // Used as MSG_HOME " " MSG_X MSG_Y MSG_Z " " MSG_FIRST
 #define MSG_FIRST                           _UxGT("primero")
 #define MSG_ZPROBE_ZOFFSET                  _UxGT("Desfase Z")
@@ -191,8 +198,10 @@
 #define MSG_DELTA_CALIBRATE_Y               _UxGT("Calibrar Y")
 #define MSG_DELTA_CALIBRATE_Z               _UxGT("Calibrar Z")
 #define MSG_DELTA_CALIBRATE_CENTER          _UxGT("Calibrar Centro")
+#define MSG_DELTA_SETTINGS                  _UxGT("Ajustes Delta")
 #define MSG_DELTA_AUTO_CALIBRATE            _UxGT("Auto Calibración")
 #define MSG_DELTA_HEIGHT_CALIBRATE          _UxGT("Est. Altura Delta")
+#define MSG_DELTA_Z_OFFSET_CALIBRATE        _UxGT("Desfase sensor Z")
 #define MSG_INFO_MENU                       _UxGT("Inf. Impresora")
 #define MSG_INFO_PRINTER_MENU               _UxGT("Inf. Impresora")
 #define MSG_INFO_STATS_MENU                 _UxGT("Estadísticas Imp.")
@@ -204,7 +213,7 @@
 #define MSG_CASE_LIGHT                      _UxGT("Luz cabina")
 
 #if LCD_WIDTH >= 20
-  #define MSG_INFO_PRINT_COUNT              _UxGT("Conteo de impresión")
+  #define MSG_INFO_PRINT_COUNT              _UxGT("Estadisticas de impresión")
   #define MSG_INFO_COMPLETED_PRINTS         _UxGT("Completadas")
   #define MSG_INFO_PRINT_TIME               _UxGT("Tiempo total de imp.")
   #define MSG_INFO_PRINT_LONGEST            _UxGT("Impresión más larga")
@@ -228,6 +237,11 @@
 #define MSG_FILAMENT_CHANGE_OPTION_HEADER   _UxGT("OPC. REINICIO:")
 #define MSG_FILAMENT_CHANGE_OPTION_EXTRUDE  _UxGT("Extruir más")
 #define MSG_FILAMENT_CHANGE_OPTION_RESUME   _UxGT("Resumir imp.")
+
+#define MSG_FILAMENT_CHANGE_HEADER_PAUSE    _UxGT("IMPR. PAUSADA")
+#define MSG_FILAMENT_CHANGE_HEADER_LOAD     _UxGT("CARGAR FILAMENTO")
+#define MSG_FILAMENT_CHANGE_HEADER_UNLOAD   _UxGT("RETIRAR FILAMENTO")
+#define MSG_FILAMENT_CHANGE_OPTION_PURGE    _UxGT("Purgar mas")
 
 #define MSG_FILAMENT_CHANGE_MINTEMP         _UxGT("Temp Mínima es ")
 #define MSG_FILAMENT_CHANGE_NOZZLE          _UxGT("  Boquilla: ")
