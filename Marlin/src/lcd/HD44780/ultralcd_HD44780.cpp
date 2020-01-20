@@ -838,13 +838,15 @@ void MarlinUI::draw_status_screen() {
                 duration_t lcdtend = (((print_job_timer_lcd_estimated.duration()*100)/card.percentDone())-print_job_timer_lcd_estimated.duration());
 		lcd_put_wchar(LCD_STR_CLOCK[0]);
                 lcdttotalnow.toDigital(ebuffer);
-                lcd_put_int(ebuffer);
-                lcd_put_wchar("  ");
+                lcd_put_u8str(ebuffer);
+                lcd_put_wchar(' ');
+                lcd_put_wchar(' ');
                 lcdttotal.toDigital(ebuffer);
-                lcd_put_int(ebuffer);
-                lcd_put_wchar("  ");
+                lcd_put_u8str(ebuffer);
+                lcd_put_wchar(' ');
+		lcd_put_wchar(LCD_STR_REFRESH[0]);
                 lcdtend.toDigital(ebuffer);
-                lcd_put_int(ebuffer);
+                lcd_put_u8str(ebuffer);
                 }
                #else	
                 xy_pos_t lpos = current_position; toLogical(lpos);
