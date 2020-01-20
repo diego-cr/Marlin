@@ -205,3 +205,9 @@ class PrintCounter: public Stopwatch {
 #else
   extern Stopwatch print_job_timer;
 #endif
+
+// LCD_ESTIMATED_TIME
+#if ENABLED(LCD_ESTIMATED_TIME)
+  extern Stopwatch print_job_timer_lcd_estimated;
+#endif
+

@@ -829,10 +829,29 @@ void MarlinUI::draw_status_screen() {
                 && !printingIsActive()
               #endif
             ) {
-              xy_pos_t lpos = current_position; toLogical(lpos);
-              _draw_axis_value(X_AXIS, ftostr4sign(lpos.x), blink);
-              lcd_put_wchar(' ');
-              _draw_axis_value(Y_AXIS, ftostr4sign(lpos.y), blink);
+	       // LCD_ESTIMATED_TIME
+               #if ENABLED(LCD_ESTIMATED_TIME)
+               char ebuffer[10];
+               if ((card.isFileOpen()) && (((int)(card.percentDone()) >= 5))) {
+                duration_t lcdttotalnow = print_job_timer_lcd_estimated.duration();
+                duration_t lcdttotal = ((print_job_timer_lcd_estimated.duration()*100)/card.percentDone());
+                duration_t lcdtend = (((print_job_timer_lcd_estimated.duration()*100)/card.percentDone())-print_job_timer_lcd_estimated.duration());
+		lcd_put_wchar(LCD_STR_CLOCK[0]);
+                lcdttotalnow.toDigital(ebuffer);
+                lcd_put_int(ebuffer);
+                lcd_put_wchar("  ");
+                lcdttotal.toDigital(ebuffer);
+                lcd_put_int(ebuffer);
+                lcd_put_wchar("  ");
+                lcdtend.toDigital(ebuffer);
+                lcd_put_int(ebuffer);
+                }
+               #else	
+                xy_pos_t lpos = current_position; toLogical(lpos);
+                _draw_axis_value(X_AXIS, ftostr4sign(lpos.x), blink);
+                lcd_put_wchar(' ');
+                _draw_axis_value(Y_AXIS, ftostr4sign(lpos.y), blink);
+               #endif // LCD_ESTIMATED_TIME
             }
             else {
               #if ENABLED(LCD_SHOW_E_TOTAL)
@@ -849,8 +868,10 @@ void MarlinUI::draw_status_screen() {
 
       #endif // LCD_WIDTH >= 20
 
-      lcd_moveto(LCD_WIDTH - 8, 1);
-      _draw_axis_value(Z_AXIS, ftostr52sp(LOGICAL_Z_POSITION(current_position.z)), blink);
+      #if DISABLED(LCD_ESTIMATED_TIME)
+        lcd_moveto(LCD_WIDTH - 8, 1);
+        _draw_axis_value(Z_AXIS, ftostr52sp(LOGICAL_Z_POSITION(current_position.z)), blink);
+      #endif // LCD_ESTIMATED_TIME
 
       #if HAS_LEVELING && !HAS_HEATED_BED
         lcd_put_wchar(planner.leveling_active || blink ? '_' : ' ');

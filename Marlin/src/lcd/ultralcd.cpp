@@ -1505,6 +1505,9 @@ void MarlinUI::update() {
       host_prompt_open(PROMPT_INFO, PSTR("UI Aborted"), PSTR("Dismiss"));
     #endif
     print_job_timer.stop();
+    #if ENABLED(LCD_ESTIMATED_TIME)
+      print_job_timer_lcd_estimated.stop();
+    #endif
     set_status_P(GET_TEXT(MSG_PRINT_ABORTED));
     #if HAS_LCD_MENU
       return_to_status();

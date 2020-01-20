@@ -384,6 +384,9 @@ void Endstops::event_handler() {
         quickstop_stepper();
         thermalManager.disable_all_heaters();
         print_job_timer.stop();
+	#if ENABLED(LCD_ESTIMATED_TIME)
+	  print_job_timer_lcd_estimated.stop();
+	#endif
       }
     #endif
   }

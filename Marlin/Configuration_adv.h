@@ -980,6 +980,9 @@
   #endif
 #endif
 
+// When using an LCD, uncomment the line below to display estimated total and remaining time, will appear for 5% printing or more
+#define LCD_ESTIMATED_TIME
+
 #if ENABLED(SDSUPPORT)
 
   // Some RAMPS and other boards don't detect when an SD card is inserted. You can work

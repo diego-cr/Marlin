@@ -22,12 +22,18 @@
 
 #include "../inc/MarlinConfig.h"
 
+
 #if DISABLED(PRINTCOUNTER)
 
 #include "../libs/stopwatch.h"
 Stopwatch print_job_timer;      // Global Print Job Timer instance
-
 #else // PRINTCOUNTER
+
+// LCD_ESTIMATED_TIME
+#if ENABLED(LCD_ESTIMATED_TIME)
+  #include "../libs/stopwatch.h"
+  Stopwatch print_job_timer_lcd_estimated;
+#endif
 
 #if ENABLED(EXTENSIBLE_UI)
   #include "../lcd/extensible_ui/ui_api.h"

@@ -79,6 +79,9 @@ void GcodeSuite::M104() {
        */
       if (temp <= (EXTRUDE_MINTEMP) / 2) {
         print_job_timer.stop();
+        #if ENABLED(LCD_ESTIMATED_TIME)
+          print_job_timer_lcd_estimated.stop();
+        #endif
         ui.reset_status();
       }
     #endif
@@ -127,6 +130,9 @@ void GcodeSuite::M109() {
        */
       if (parser.value_celsius() <= (EXTRUDE_MINTEMP) / 2) {
         print_job_timer.stop();
+        #if ENABLED(LCD_ESTIMATED_TIME)
+          print_job_timer_lcd_estimated.stop();
+        #endif
         ui.reset_status();
       }
       else

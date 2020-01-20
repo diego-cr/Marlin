@@ -91,6 +91,9 @@
 void GcodeSuite::M81() {
   thermalManager.disable_all_heaters();
   print_job_timer.stop();
+  #if ENABLED(LCD_ESTIMATED_TIME)
+    print_job_timer_lcd_estimated.stop();
+  #endif
   planner.finish_and_disable();
 
   #if FAN_COUNT > 0

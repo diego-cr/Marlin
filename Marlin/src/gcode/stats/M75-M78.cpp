@@ -45,6 +45,10 @@ void GcodeSuite::M76() {
  */
 void GcodeSuite::M77() {
   print_job_timer.stop();
+  #if ENABLED(LCD_ESTIMATED_TIME)
+    print_job_timer_lcd_estimated.stop();
+  #endif
+
 }
 
 #if ENABLED(PRINTCOUNTER)

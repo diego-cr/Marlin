@@ -400,6 +400,9 @@ void startOrResumeJob() {
     queue.clear();
     quickstop_stepper();
     print_job_timer.stop();
+    #if ENABLED(LCD_ESTIMATED_TIME)      
+	print_job_timer_lcd_estimated.stop();
+    #endif
     #if DISABLED(SD_ABORT_NO_COOLDOWN)
       thermalManager.disable_all_heaters();
     #endif
@@ -786,6 +789,9 @@ void minkill(const bool steppers_off/*=false*/) {
 void stop() {
   thermalManager.disable_all_heaters(); // 'unpause' taken care of in here
   print_job_timer.stop();
+  #if ENABLED(LCD_ESTIMATED_TIME)      
+    print_job_timer_lcd_estimated.stop();
+  #endif
 
   #if ENABLED(PROBING_FANS_OFF)
     if (thermalManager.fans_paused) thermalManager.set_fans_paused(false); // put things back the way they were

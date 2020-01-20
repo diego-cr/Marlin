@@ -2902,6 +2902,11 @@ void Temperature::tick() {
         KEEPALIVE_STATE(NOT_BUSY);
       #endif
 
+      // LCD_ESTIMATED_TIME  
+      #if ENABLED(LCD_ESTIMATED_TIME)
+        print_job_timer_lcd_estimated.start();
+      #endif
+
       #if ENABLED(PRINTER_EVENT_LEDS)
         const float start_temp = degHotend(target_extruder);
         printerEventLEDs.onHotendHeatingStart();

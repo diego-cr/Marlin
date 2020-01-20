@@ -1079,6 +1079,9 @@ void CardReader::printingHasFinished() {
     #endif
 
     print_job_timer.stop();
+    #if ENABLED(LCD_ESTIMATED_TIME)
+      print_job_timer_lcd_estimated.stop();
+    #endif
     queue.enqueue_now_P(print_job_timer.duration() > 60 ? PSTR("M31") : PSTR("M117"));
 
     #if ENABLED(SDCARD_SORT_ALPHA)
