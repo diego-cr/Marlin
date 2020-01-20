@@ -394,7 +394,21 @@ void scroll_screen(const uint8_t limit, const bool is_menu) {
   #include "../../feature/babystep.h"
 
   void lcd_babystep_zoffset() {
-    if (ui.use_click()) return ui.goto_previous_screen_no_defer();
+
+    if (!TEST(axis_known_position, X_AXIS) || !TEST(axis_known_position, Y_AXIS) || !TEST(axis_known_position, Z_AXIS)) {
+      //queue.enqueue_now_P(PSTR("M851 Z0"));
+      queue.enqueue_now_P(PSTR("G28"));
+      //queue.enqueue_now_P(PSTR("M851 Z0"));
+      queue.enqueue_now_P(PSTR("G1 Z0"));
+      //queue.enqueue_now_P(PSTR("M117"));
+    }
+
+    if (ui.use_click()) {
+            queue.enqueue_now_P(PSTR("M500"));
+            queue.enqueue_now_P(PSTR("M300 S500 P2"));
+            queue.enqueue_now_P(PSTR("G1 Z50"));
+	    return ui.goto_previous_screen_no_defer();
+    }
     ui.defer_status_screen();
     const bool do_probe = DISABLED(BABYSTEP_HOTEND_Z_OFFSET) || active_extruder == 0;
     if (ui.encoderPosition) {
