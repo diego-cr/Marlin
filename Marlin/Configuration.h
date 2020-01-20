@@ -25,7 +25,7 @@
  * Choose your version:
  */
 // normal size or plus?
-//#define ANYCUBIC_KOSSEL_PLUS
+#define ANYCUBIC_KOSSEL_PLUS
 
 // Anycubic Probe version 1 or 2 see README.md; 0 for no probe, 3 film pressure probe.
 #define ANYCUBIC_PROBE_VERSION 3
