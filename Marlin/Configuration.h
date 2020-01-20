@@ -27,14 +27,14 @@
 // normal size or plus?
 //#define ANYCUBIC_KOSSEL_PLUS
 
-// Anycubic Probe version 1 or 2 see README.md; 0 for no probe
-#define ANYCUBIC_PROBE_VERSION 0
+// Anycubic Probe version 1 or 2 see README.md; 0 for no probe, 3 film pressure probe.
+#define ANYCUBIC_PROBE_VERSION 3
 
 // Heated Bed:
 // 0 ... no heated bed
 // 1 ... aluminium heated bed with "BuildTak-like" sticker
 // 2 ... ultrabase heated bed
-#define ANYCUBIC_KOSSEL_ENABLE_BED 0
+#define ANYCUBIC_KOSSEL_ENABLE_BED 1
 
 /**
  * Configuration.h
@@ -769,7 +769,7 @@
 // Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup).
 #define X_MIN_ENDSTOP_INVERTING false  // Set to true to invert the logic of the endstop.
 #define Y_MIN_ENDSTOP_INVERTING false  // Set to true to invert the logic of the endstop.
-#define Z_MIN_ENDSTOP_INVERTING (ANYCUBIC_PROBE_VERSION + 0 == 1) // V1 is NO, V2 is NC
+#define Z_MIN_ENDSTOP_INVERTING (ANYCUBIC_PROBE_VERSION + 0 == 1 || ANYCUBIC_PROBE_VERSION + 0 == 3) // V1 is NO, V2 is NC
 #define X_MAX_ENDSTOP_INVERTING false  // Set to true to invert the logic of the endstop.
 #define Y_MAX_ENDSTOP_INVERTING false  // Set to true to invert the logic of the endstop.
 #define Z_MAX_ENDSTOP_INVERTING false  // Set to true to invert the logic of the endstop.
@@ -1094,7 +1094,9 @@
  *
  * Specify a Probe position as { X, Y, Z }
  */
-#if ANYCUBIC_PROBE_VERSION == 2
+#if ANYCUBIC_PROBE_VERSION == 3
+  #define NOZZLE_TO_PROBE_OFFSET { 0, 0, -0.25 }
+#elif ANYCUBIC_PROBE_VERSION == 2
   #define NOZZLE_TO_PROBE_OFFSET { 0, 0, -16.8 }
 #elif ANYCUBIC_PROBE_VERSION == 1
   #define NOZZLE_TO_PROBE_OFFSET { 0, 0, -19.0 }
