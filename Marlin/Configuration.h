@@ -1112,13 +1112,13 @@
  *
  * Specify a Probe position as { X, Y, Z }
  */
-#if ANYCUBIC_PROBE_VERSION == 2
+
+#if ANYCUBIC_PROBE_VERSION == 3
+  #define NOZZLE_TO_PROBE_OFFSET { 0, 0, -0.25 }
+#elif ANYCUBIC_PROBE_VERSION == 2
   #define NOZZLE_TO_PROBE_OFFSET { 0, 0, -16.8 }
 #elif ANYCUBIC_PROBE_VERSION == 1
   #define NOZZLE_TO_PROBE_OFFSET { 0, 0, -19.0 }
-#else
-#elif ANYCUBIC_PROBE_VERSION == 3
-  #define NOZZLE_TO_PROBE_OFFSET { 0, 0, -0.25 }
 #else
   #define NOZZLE_TO_PROBE_OFFSET { 0, 0, 0 }
 #endif
@@ -1265,7 +1265,7 @@
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS -(DELTA_PRINTABLE_RADIUS)
 #define Y_MIN_POS -(DELTA_PRINTABLE_RADIUS)
-#define Z_MIN_POS 0
+#define Z_MIN_POS -20
 #define X_MAX_POS DELTA_PRINTABLE_RADIUS
 #define Y_MAX_POS DELTA_PRINTABLE_RADIUS
 #define Z_MAX_POS MANUAL_Z_HOME_POS
