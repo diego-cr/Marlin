@@ -25,16 +25,16 @@
  * Choose your version:
  */
 // normal size or plus?
-//#define ANYCUBIC_KOSSEL_PLUS
+#define ANYCUBIC_KOSSEL_PLUS
 
-// Anycubic Probe version 1 or 2 see README.md; 0 for no probe
-#define ANYCUBIC_PROBE_VERSION 0
+// Anycubic Probe version 1 or 2 see README.md; 0 for no probe, 3 film pressure probe
+#define ANYCUBIC_PROBE_VERSION 3
 
 // Heated Bed:
 // 0 ... no heated bed
 // 1 ... aluminium heated bed with "BuildTak-like" sticker
 // 2 ... ultrabase heated bed
-#define ANYCUBIC_KOSSEL_ENABLE_BED 0
+#define ANYCUBIC_KOSSEL_ENABLE_BED 1
 
 /**
  * Configuration.h
@@ -147,7 +147,7 @@
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "ANYCUBIC Kossel"
+#define CUSTOM_MACHINE_NAME "Kossel Plus"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like http://www.uuidgenerator.net/version4
@@ -765,7 +765,7 @@
 // Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup).
 #define X_MIN_ENDSTOP_INVERTING false  // Set to true to invert the logic of the endstop.
 #define Y_MIN_ENDSTOP_INVERTING false  // Set to true to invert the logic of the endstop.
-#define Z_MIN_ENDSTOP_INVERTING (ANYCUBIC_PROBE_VERSION + 0 == 1) // V1 is NO, V2 is NC
+#define Z_MIN_ENDSTOP_INVERTING (ANYCUBIC_PROBE_VERSION + 0 == 1 || ANYCUBIC_PROBE_VERSION + 0 == 3) // V1 is NO, V2 is NC
 #define X_MAX_ENDSTOP_INVERTING false  // Set to true to invert the logic of the endstop.
 #define Y_MAX_ENDSTOP_INVERTING false  // Set to true to invert the logic of the endstop.
 #define Z_MAX_ENDSTOP_INVERTING false  // Set to true to invert the logic of the endstop.
@@ -1115,6 +1115,9 @@
   #define NOZZLE_TO_PROBE_OFFSET { 0, 0, -16.8 }
 #elif ANYCUBIC_PROBE_VERSION == 1
   #define NOZZLE_TO_PROBE_OFFSET { 0, 0, -19.0 }
+#else
+#elif ANYCUBIC_PROBE_VERSION == 3
+  #define NOZZLE_TO_PROBE_OFFSET { 0, 0, -0.25 }
 #else
   #define NOZZLE_TO_PROBE_OFFSET { 0, 0, 0 }
 #endif
@@ -1639,13 +1642,13 @@
 
 // Preheat Constants
 #define PREHEAT_1_LABEL       "PLA"
-#define PREHEAT_1_TEMP_HOTEND 190
-#define PREHEAT_1_TEMP_BED     60
+#define PREHEAT_1_TEMP_HOTEND 210
+#define PREHEAT_1_TEMP_BED     40
 #define PREHEAT_1_FAN_SPEED   255 // Value from 0 to 255
 
 #define PREHEAT_2_LABEL       "ABS"
 #define PREHEAT_2_TEMP_HOTEND 240
-#define PREHEAT_2_TEMP_BED    100
+#define PREHEAT_2_TEMP_BED    70
 #define PREHEAT_2_FAN_SPEED   255 // Value from 0 to 255
 
 /**
