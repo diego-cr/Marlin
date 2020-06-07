@@ -1261,7 +1261,17 @@ void lcd_quick_feedback(const bool clear_buttons) {
     #if ENABLED(BABYSTEP_ZPROBE_OFFSET)
 
       void lcd_babystep_zoffset() {
-        if (use_click()) { return lcd_goto_previous_menu_no_defer(); }
+	if (!TEST(axis_known_position, X_AXIS) || !TEST(axis_known_position, Y_AXIS) || !TEST(axis_known_position, Z_AXIS)) {
+	  enqueue_and_echo_commands_P(PSTR("M851 Z0"));
+    	  enqueue_and_echo_commands_P(PSTR("G28"));
+    	  enqueue_and_echo_commands_P(PSTR("G1 Z0"));
+	  enqueue_and_echo_commands_P(PSTR("M851 Z0"));
+	  enqueue_and_echo_commands_P(PSTR("M117"));
+	}
+	if (use_click()) {
+	  lcd_completion_feedback(settings.save());
+	  return lcd_goto_previous_menu_no_defer();
+	}
         defer_return_to_status = true;
         ENCODER_DIRECTION_NORMAL();
         if (encoderPosition) {
@@ -2691,6 +2701,12 @@ void lcd_quick_feedback(const bool clear_buttons) {
     // ^ Main
     //
     MENU_BACK(MSG_MAIN);
+
+    #if ENABLED(BABYSTEP_ZPROBE_OFFSET)
+      MENU_ITEM(submenu, MSG_ZPROBE_ZOFFSET, lcd_babystep_zoffset);
+    #elif HAS_BED_PROBE
+      MENU_ITEM_EDIT(float52, MSG_ZPROBE_ZOFFSET, &zprobe_zoffset, Z_PROBE_OFFSET_RANGE_MIN, Z_PROBE_OFFSET_RANGE_MAX);
+    #endif
 
     //
     // Move Axis
